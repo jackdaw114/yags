@@ -1,0 +1,73 @@
+#!/bin/env lua
+
+local lfs =require("lfs")
+
+local path = os.getenv("HOME") .. "/.config/nvim/pack"
+
+local directory_list ={}
+local function update_repositories(dir_path)
+	for filename in lfs.dir(dir_path) do
+		if filename ~="." and filename ~= ".." then
+			local full_path = dir_path .. "/" .. filename
+			local attributes = lfs.attributes(full_path)
+			if attributes and attributes.mode == "directory" then
+				for reponame in lfs.dir(full_path .. "/start") do
+					if reponame ~="." and reponame ~=".." then
+						local full_repo = full_path .. "/start/" .. reponame
+						
+						local status_command=string.format("cd %s && git status -s",full_repo)
+						local pull_command=string.format("cd %s && git pull -v",full_repo)
+						
+						local handleStatus = io.popen(status_command)
+						
+						local output = handleStatus:read("*a")
+						local handleStatusExitStatus = handleStatus:close()
+						
+						if handleStatusExitStatus then
+							print("checking " .. reponame)
+						
+							else
+						
+							print(reponame .. " status command error")
+						end	
+
+
+						if output ~= "" then
+						
+							local handlePull = io.popen(pull_command)
+							local outputPull = handlePull:read("*a")
+							
+							print(outputPull)
+							
+							local exitStatusPull = handlePull:close()
+						
+							if exitStatusPull then
+								print(reponame .. " Pull successful")
+								else
+								print(reponame .. " Pull failed")
+							end
+						else
+							print(reponame .. " is up to date")
+						end
+			
+					end
+				end
+			end
+		end
+	end
+end
+
+if arg[1] then
+	if arg[1]:sub(1,1) == "-" then
+		local operation= arg[1]:sub(2,2)
+		if operation == "P" then
+			update_repositories(path)
+		else
+			print("invalid option")
+		end
+	else
+		print("please select opreation using -{operation}")
+	end
+else 
+	print("options are -P for updating current repos")
+end
