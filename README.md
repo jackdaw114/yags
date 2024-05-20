@@ -1,5 +1,5 @@
 # Intro
-  - yags is just a wrapper for the git command at its core
+  - yags is just a wrapper for the git command
   - a git repo manager
   - use case:
      + installation of vim packages in vims runtime environment
