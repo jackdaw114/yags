@@ -1,6 +1,6 @@
 # Intro
   - a git repo manager
-  - usecase:
+  - use case:
      + installation of vim packages in vims runtime environment
      + centralizing the management of all packages installed 
     
