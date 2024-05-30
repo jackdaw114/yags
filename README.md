@@ -12,3 +12,4 @@
  + uninstallation (directory based / so multiple instances can be created)
  + commit functionality ?
  + build system / build detection (not sure if it will work)
+ + submodule management instead of cloning as an option ( manage config files as a seperate local git repo give main dir ig)
