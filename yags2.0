@@ -1,0 +1,10 @@
+#!/bin/env lua
+
+-- improvements to be made
+-- .yags directory for storing repo data
+-- store  :| username/repo_name  /path/to/clone |:
+-- check if .git exists already in directory
+-- update file only if all clear
+-- store *infix* rule (for nvim)
+-- uninstall (remove entry rewrite file) 
+-- submodule handling?
