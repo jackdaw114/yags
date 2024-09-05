@@ -17,11 +17,13 @@ local function update_repositories(dir_path)
 					if reponame ~="." and reponame ~=".." then
 						local full_repo = full_path .. "/start/" .. reponame
 						
-						local status_command=string.format("cd %s && git status -s",full_repo)
+						local status_command=string.format("cd %s && git status -sb",full_repo)
 						local pull_command=string.format("cd %s && git pull -v",full_repo)
-						
+					
+					
+
 						local handleStatus = io.popen(status_command)
-						
+							
 						local output = handleStatus:read("*a")
 						local handleStatusExitStatus = handleStatus:close()
 						
